@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace SnakeAndLadder
 {
@@ -12,31 +7,54 @@ namespace SnakeAndLadder
         static void Main(string[] args)
         {
             int position = 0;
+            int winningPosition = 100;
             const int snake = 1;
             const int ladder = 2;
             const int noPlay = 3;
             Random r = new Random();
-            //roll the die
-            int dieNo = r.Next(1, 7);
-            //check for the options using RANDOM
-            int options = r.Next(1, 4);
-            switch (options)
+
+            while (position < winningPosition)
             {
-                case noPlay:
-                    Console.WriteLine("No Play! you stay the same position");
-                    break;
-                case ladder:
-                    Console.WriteLine("Ladder! you move ahead by {0} positions", dieNo);
-                    position = position + dieNo;
-                    break;
-                case snake:
-                    Console.WriteLine("Snake! you move behind by {0} positions", dieNo);
-                    position = position - dieNo;
-                    break;
+                //roll the die and check for the options using RANDOM
+                int dieNo = r.Next(1, 7);
+                int options = r.Next(1, 4);
+
+                switch (options)
+                {
+                    case noPlay:
+                        Console.WriteLine("No Play! You stay in the same position");
+                        break;
+                    case ladder:                       
+                        if (position < winningPosition )
+                        {
+                            position += dieNo;
+                            Console.WriteLine("Ladder! You move ahead by {0} positions", dieNo);
+                        }
+                        else if (position >= winningPosition)
+                        {
+                            int excess = position - winningPosition;
+                            dieNo = excess;
+                            position += dieNo;
+                            Console.WriteLine("Ladder! You move ahead by {0} positions", dieNo);
+                        }
+                        break;
+                    case snake:
+                        Console.WriteLine("Snake! You move behind by {0} positions", dieNo);
+                        position -= dieNo;
+                        break;
+                }
+                //check if player's position is within valid range
+                if (position < 0)
+                {
+                    position = 0;
+                }
+                else if (position > winningPosition)
+                {
+                    position = winningPosition;
+                }
+                Console.WriteLine("Your current position is {0}", position);
             }
-            Console.WriteLine("Your current position is {0}",position);
+            Console.WriteLine("Congrats!! You have reached the winning position of {0}", winningPosition);
         }
     }
 }
-
-

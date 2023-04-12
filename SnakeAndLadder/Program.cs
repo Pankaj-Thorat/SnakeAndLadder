@@ -20,7 +20,6 @@ namespace SnakeAndLadder
                 //roll the die and check for the options using RANDOM
                 int dieNo = r.Next(1, 7);
                 int options = r.Next(1, 4);
-
                 switch (options)
                 {
                     case noPlay:

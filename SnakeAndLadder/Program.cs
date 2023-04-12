@@ -24,18 +24,17 @@ namespace SnakeAndLadder
                     case noPlay:
                         Console.WriteLine("No Play! You stay in the same position");
                         break;
-                    case ladder:                       
-                        if (position < winningPosition )
+                    case ladder:
+                        //to get the exact 100
+                        int newPosition = position + dieNo;
+                        if (newPosition <= winningPosition)
                         {
-                            position += dieNo;
+                            position = newPosition;
                             Console.WriteLine("Ladder! You move ahead by {0} positions", dieNo);
                         }
-                        else if (position >= winningPosition)
+                        else
                         {
-                            int excess = position - winningPosition;
-                            dieNo = excess;
-                            position += dieNo;
-                            Console.WriteLine("Ladder! You move ahead by {0} positions", dieNo);
+                            Console.WriteLine("Ladder! You need {0} to win. Stay where you are.", winningPosition - position);
                         }
                         break;
                     case snake:
@@ -47,10 +46,6 @@ namespace SnakeAndLadder
                 if (position < 0)
                 {
                     position = 0;
-                }
-                else if (position > winningPosition)
-                {
-                    position = winningPosition;
                 }
                 Console.WriteLine("Your current position is {0}", position);
             }

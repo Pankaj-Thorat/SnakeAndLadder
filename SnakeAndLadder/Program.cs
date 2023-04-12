@@ -11,10 +11,13 @@ namespace SnakeAndLadder
             const int snake = 1;
             const int ladder = 2;
             const int noPlay = 3;
+            int noOfTurns = 0;
             Random r = new Random();
 
             while (position < winningPosition)
-            {
+            {   
+                //to get the number of times the dice was played
+                noOfTurns++;
                 //roll the die and check for the options using RANDOM
                 int dieNo = r.Next(1, 7);
                 int options = r.Next(1, 4);
@@ -49,7 +52,8 @@ namespace SnakeAndLadder
                 }
                 Console.WriteLine("Your current position is {0}", position);
             }
-            Console.WriteLine("Congrats!! You have reached the winning position of {0}", winningPosition);
+            Console.WriteLine("Congrats!! You have reached the winning position of {0} by playing {1} turns.", winningPosition,noOfTurns);
+
         }
     }
 }

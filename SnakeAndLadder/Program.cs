@@ -3,28 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace SnakeAndLadder
 {
     internal class Program
     {
-        //initialize from zero position
-        public static int startPosition = 0;
-        // generating random number between 1 to 6 using RANDOM method.
-        public int rollingDie() 
-        {
-            Random r = new Random();
-            int dieNo = r.Next(1,7);
-            return dieNo;
-        }
-
-
         static void Main(string[] args)
         {
-            Console.WriteLine("player started at position {0}", startPosition);
-            int num = new Program().rollingDie();
-            //display number generated using Random method.
-            Console.WriteLine("die value after rolling the die is {0}",num );
+            int position = 0;
+            const int snake = 1;
+            const int ladder = 2;
+            const int noPlay = 3;
+            Random r = new Random();
+            //roll the die
+            int dieNo = r.Next(1, 7);
+            //check for the options using RANDOM
+            int options = r.Next(1, 4);
+            switch (options)
+            {
+                case noPlay:
+                    Console.WriteLine("No Play! you stay the same position");
+                    break;
+                case ladder:
+                    Console.WriteLine("Ladder! you move ahead by {0} positions", dieNo);
+                    position = position + dieNo;
+                    break;
+                case snake:
+                    Console.WriteLine("Snake! you move behind by {0} positions", dieNo);
+                    position = position - dieNo;
+                    break;
+            }
+            Console.WriteLine("Your current position is {0}",position);
         }
     }
 }
+
+
